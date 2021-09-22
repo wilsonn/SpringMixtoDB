@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.whnm.dao.PersonaDao;
 import com.whnm.model.Persona;
@@ -49,11 +50,15 @@ public class PersonaSpringJdbcTemplateDaoImpl extends JdbcDaoSupport implements 
 		Persona persona = this.getJdbcTemplate().queryForObject(sql, new Object [] {id}, new BeanPropertyRowMapper<Persona>(Persona.class));
 		return persona;
 	}
-
+	
+	@Transactional("transactionManager")
 	@Override
 	public void delete(Integer id) {
 		String sql = "DELETE FROM PERSONA WHERE ID=?";
 		this.getJdbcTemplate().update(sql, id);
+		
+		String sqlUpdate = "UPDATE PERSONA SET NOMBRES=?, APELLIDOS=? ,WHERE ID=?";		
+		this.getJdbcTemplate().update(sqlUpdate, id);
 	}
 
 }

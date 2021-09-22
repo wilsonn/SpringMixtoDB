@@ -15,16 +15,13 @@ public class App {
 		PersonaService personaService = context.getBean(PersonaServiceImpl.class);
 		
 		Persona persona = new Persona();
-		persona.setId(1);
-		persona.setNombres("Aylín");
-		persona.setApellidos("Neira Abad");
+		persona.setNombres("Elvia");
+		persona.setApellidos("Abad");
 		personaService.create(persona);
 		
-		personaService.listAll().forEach(x -> {System.out.println(x.toString());});
+		personaService.listAll().forEach(x -> {System.out.println(x.toString());});		
 		
-		personaService.delete(29);
-		
-		personaService.listAll().forEach(x -> {System.out.println(x.toString());});
+		personaService.delete(35);
 		
 		((ConfigurableApplicationContext)context).close();
 	}

@@ -36,7 +36,8 @@ public class PersonaServiceImpl implements PersonaService{
 	public Persona find(Integer id) {
 		return personaDAO.find(id);
 	}
-
+	
+//	@Transactional //no funciona
 	@Override
 	public void delete(Integer id) {
 		personaDAO.delete(id);
